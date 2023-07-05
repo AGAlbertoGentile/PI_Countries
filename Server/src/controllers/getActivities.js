@@ -3,12 +3,15 @@
 
 const getActivities = async (req, res) => {
     try{
-        const response =  'funciono';
-        res.status(200).json([response]);
+        let allActivities = [];
+        // const allActivities = 
+        const {id, name, difficulty, duration, season} = req.body;
+        console.log(id, name, difficulty, duration, season)
+        res.status(200).json(data);
     }catch(error){
-        res.status(400).json({erros: error.message})
+        res.status(400).json({error: error.message})
     }
-}
+};
 
 module.exports = {
     getActivities,

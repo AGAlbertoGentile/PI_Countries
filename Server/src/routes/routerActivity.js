@@ -7,7 +7,7 @@ const routerActivity = Router();
 
 routerActivity.post("/",postActivity);
 
-// routerActivity.get("/",getActivities);
+routerActivity.get("/",getActivities);
 
 module.exports = {
     routerActivity,
