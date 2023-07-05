@@ -9,6 +9,15 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
+      validate: {
+        isAlpha: true,
+        isUppercase: true,
+        isThree: (cod) => {
+          if (cod.length !== 3) {
+            throw Error('Country ID must consist of 3 uppercase letters.')
+          }
+        }
+      },
     },
     name: {
       type: DataTypes.STRING,
@@ -24,10 +33,10 @@ module.exports = (sequelize) => {
       values: ["Europe", "Asia", "Africa", "Oceania", "Antarctica", "North America", "South America"],
       allowNull: false,
     },
-    // capital: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
+    capital: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     region: {
       type: DataTypes.STRING,
       allowNull: false,

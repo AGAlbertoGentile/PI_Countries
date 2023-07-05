@@ -6,7 +6,7 @@ const { getCountryById } = require('../controllers/getCountryById');
 const routerCountries = Router();
 
 
-routerCountries.get("/",getCountries);
+// routerCountries.get("/",getCountries);
 
 routerCountries.get("/:idPais",getCountryById);
 
