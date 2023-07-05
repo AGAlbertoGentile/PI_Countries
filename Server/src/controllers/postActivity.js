@@ -12,18 +12,17 @@ const postActivity = async (req, res) => {
             name: name,
             difficulty: difficulty,
             duration: duration,
-            season: season
+            season: season,
+            // include: {
+            //     model: Country,
+            //     attributes: ['name'],
+            //     through: { attributes: [] }
+            // }
         });
-        await newActivity.reload({
-            include: {
-                model: Country,
-                attributes: ['name'],
-                through: { attributes: [] }
-            }
-        });
+        
         countries.forEach(async (country) => {
             await newActivity.addCountry(country);
-        })
+        });
         
         res.status(200).json(newActivity);
     } catch (error) {
