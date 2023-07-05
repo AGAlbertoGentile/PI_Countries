@@ -1,15 +1,12 @@
 const { Router } = require("express");
+const {routerCountries} = require ('../routes/routerCountries');
+const {routerActivity} = require ('../routes/routerActivity');
 
 const router = Router();
 
-router.get("/countries",);
+router.use("/countries",routerCountries);
 
-router.get("/countries/:idPais",);
+router.use("/activity",routerActivity);
 
-router.get("/countries/name?=",);
-
-router.post("/activities",);
-
-router.get("/activities",);
 
 module.exports = router;

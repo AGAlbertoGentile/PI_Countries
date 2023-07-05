@@ -15,18 +15,19 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    flagImage: {
+    flags: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    continent: {
-      type: DataTypes.ENUM("Europe", "Asia", "Africa", "Oceania", "Antarctica", "North America", "South America"),
+    continents: {
+      type: DataTypes.ENUM,
+      values: ["Europe", "Asia", "Africa", "Oceania", "Antarctica", "North America", "South America"],
       allowNull: false,
     },
-    capital: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    // capital: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
     region: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -38,10 +39,6 @@ module.exports = (sequelize) => {
     area: {
       type: DataTypes.FLOAT,
       allowNull: true,
-    },
-    mapLocation: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     population: {
       type: DataTypes.INTEGER,
