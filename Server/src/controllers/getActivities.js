@@ -1,13 +1,13 @@
 
 // Obtiene un arreglo de objetos, donde cada objeto es una actividad turística.
 
+const {Activity} = require("../db");
+
 const getActivities = async (req, res) => {
     try{
-        let allActivities = [];
-        // const allActivities = 
-        const {id, name, difficulty, duration, season} = req.body;
-        console.log(id, name, difficulty, duration, season)
-        res.status(200).json(data);
+        let allActivities = await Activity.findAll();
+        if(allActivities.length === 0) throw Error ('No hay actividades');
+        res.status(200).json(allActivities);
     }catch(error){
         res.status(400).json({error: error.message})
     }

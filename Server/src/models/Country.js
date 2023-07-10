@@ -51,6 +51,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    maps: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   },
     { timestamps: false});
 };

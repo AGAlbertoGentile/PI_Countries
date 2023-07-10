@@ -11,7 +11,10 @@ const getCountryById = async (req, res) => {
         const { idPais } = req.params;
         const country = await Country.findOne({ 
             where: { id: idPais },
-            include: { model: Activity }
+            include: [{ 
+                model: Activity,
+                through:{attributes:[]}
+            }]
          });
 
         if (!country) throw new Error("ID not found");

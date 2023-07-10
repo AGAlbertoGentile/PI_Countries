@@ -8,17 +8,18 @@ const { Op } = require("sequelize");
 const getCountryByName = async (req, res) => {
     try {
         const { name } = req.query;
-        console.log(name);
         
         let searchCountry = await Country.findOne({
             where: {
                 name: {
-                    [Op.iLike]: `%${name}%`
+                    [Op.iLike]: `%${name}%` // busco alguna coincidencia con el nombre ingresado.
                 }
             },
-            include: { model: Activity }
+            include: [{ 
+                model: Activity,
+                through:{attributes:[]} // le indico a mi tabla intermedia que no traiga informacion.
+            }]
         });
-        console.log(searchCountry);
         if(!searchCountry) {
             return res.status(400).send('Not found');
         }

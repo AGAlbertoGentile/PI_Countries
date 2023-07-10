@@ -13,17 +13,13 @@ const postActivity = async (req, res) => {
             difficulty: difficulty,
             duration: duration,
             season: season,
-            // include: {
-            //     model: Country,
-            //     attributes: ['name'],
-            //     through: { attributes: [] }
-            // }
         });
-        
+
+        // Asociamos las actividades con los countries
         countries.forEach(async (country) => {
             await newActivity.addCountry(country);
         });
-        
+
         res.status(200).json(newActivity);
     } catch (error) {
         res.status(400).json({ error: error.message });
