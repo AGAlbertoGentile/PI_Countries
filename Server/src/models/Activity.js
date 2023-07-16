@@ -11,7 +11,6 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false,
         },
         difficulty: {
@@ -24,7 +23,6 @@ module.exports = (sequelize) => {
         },
         duration: {
             type: DataTypes.FLOAT,
-
         },
         season: {
             type: DataTypes.ENUM,

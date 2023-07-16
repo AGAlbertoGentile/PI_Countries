@@ -5,11 +5,10 @@ const { Country, Activity } = require('../db');
 const { Op } = require("sequelize");
 
 
-const getCountryByName = async (req, res) => {
+const getCountryByName = async (name) => {
     try {
-        const { name } = req.query;
-        
-        let searchCountry = await Country.findOne({
+
+        let foundCountry = await Country.findAll({
             where: {
                 name: {
                     [Op.iLike]: `%${name}%` // busco alguna coincidencia con el nombre ingresado.
@@ -20,13 +19,14 @@ const getCountryByName = async (req, res) => {
                 through:{attributes:[]} // le indico a mi tabla intermedia que no traiga informacion.
             }]
         });
-        if(!searchCountry) {
-            return res.status(400).send('Not found');
+        console.log(foundCountry)
+        if(!foundCountry) {
+            throw Error ('Not found');
         }
-        res.status(200).json(searchCountry);
+        return foundCountry;
 
     } catch (error) {
-        res.status(500).json({ erros: error.message })
+        throw Error (error.message)
     }
 };
 

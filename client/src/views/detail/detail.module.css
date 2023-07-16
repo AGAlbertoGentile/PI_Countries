@@ -1,0 +1,21 @@
+.detailContainer{
+    color: black;
+    padding: 20px;
+}
+
+.countryFlag{
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.406);
+    border-radius: 15px;
+}
+
+.countryTitle{
+    font-size: 50px;
+    color:rgb(34, 34, 34);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.265);
+}
+
+.countryInfo{
+    font-size: 30px;
+    color:rgb(34, 34, 34);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.265);
+}

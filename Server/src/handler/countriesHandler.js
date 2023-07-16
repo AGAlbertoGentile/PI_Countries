@@ -11,6 +11,7 @@ const getCountriesHandler = async(req, res) => {
             response = await getCountries();
             return res.status(200).json(response);
         };
+
         response = await getCountryByName(name);
         return res.status(200).json(response);
     } catch (error) {

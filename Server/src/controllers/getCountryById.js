@@ -16,7 +16,6 @@ const getCountryById = async (req, res) => {
                 through:{attributes:[]}
             }]
          });
-
         if (!country) throw new Error("ID not found");
         return res.status(200).json(country)
     } catch (error) {

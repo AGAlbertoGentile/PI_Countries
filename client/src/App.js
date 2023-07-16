@@ -21,7 +21,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(actions.getAllCountries());
+    dispatch(actions.setAllCountries());
   },[]);
 
   return (

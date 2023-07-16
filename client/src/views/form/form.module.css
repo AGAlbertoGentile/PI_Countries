@@ -1,0 +1,51 @@
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.spanValidation{
+    color: red;
+    font-weight: bold;
+}
+
+.validations{
+    color: red;
+    font-size: 12px;
+}
+
+/* .placeholder{
+    color: blue;
+} */
+
+.label{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.button{
+    margin-top: 20px;
+    padding: 10px;
+    background-color:aqua;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.406);
+}
+
+.countriesOptions {
+    position: absolute;
+    top: 615px;
+    right: 50px;
+    width: 500px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.buttonsCountry {
+  flex: 0 0 calc(40% - 100px); /* Esto distribuirá los elementos en 3 columnas */
+  margin-bottom: 4; /* Espacio entre los elementos */
+  /* Otros estilos para los botones */
+}
