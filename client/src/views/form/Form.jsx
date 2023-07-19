@@ -17,7 +17,7 @@ export default function Form() {
     } = useForm();
 
     const countries = useSelector((state) => state.allCountries);
-
+    
     const flag = useSelector((state) => state.searchFlag);
 
     return (
@@ -32,7 +32,6 @@ export default function Form() {
             />
             <p className={style.validations}>{errors.name}</p>
 
-
             <label className={style.label}>Difficulty *</label>
             <input className={style.placeholder}
                 name="difficulty"
@@ -40,18 +39,16 @@ export default function Form() {
                 type="number"
                 onChange={handleChange}
             />
-            {/* <p>{errors.difficulty}</p> */}
-
+            <p className={style.validations}>{errors.difficulty}</p>
 
             <label className={style.label}>Duration *</label>
             <input className={style.placeholder}
                 name="duration"
-                placeholder={"Set duration"}
+                placeholder={'Set duration (minutes)'}
                 type="number"
                 onChange={handleChange}
             />
             <p className={style.validations}>{errors.duration}</p>
-
 
             <label className={style.label}>Season *</label>
             <select name='season' onChange={handleChange} >
@@ -60,19 +57,14 @@ export default function Form() {
             </select>
             {/* <p>{errors.season}</p> */}
 
-
             <label className={style.label}>Countries *</label>
             <SearchBar />
 
             {flag && countries?.map((country) => <div className={style.countriesOptions} key={country.id}><button className={style.buttonsCountry} type='button' onClick={() => handleClick(country.id)}>{country.name}</button></div>)}
             <p>Added countries: </p>
             <p>{activity.countries.join(" - ")}</p>
-            {/* <p>{errors.countries}</p> */}
-            <button className={style.button} type="submit" disabled={!activity.name ||
-                !activity.difficulty ||
-                !activity.duration ||
-                !activity.season ||
-                !activity.countries.length === 0}>Add activity</button>
+            <p>{errors.countries}</p>
+            <button className={style.button} type="submit" disabled={Object.keys(errors).length}>Add activity</button>
 
         </form>
     )

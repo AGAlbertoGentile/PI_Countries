@@ -16,13 +16,14 @@ import * as actions from './redux/actions';
 
 function App() {
 
-  const location = useLocation();
-
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  const location = useLocation();
+
+  useEffect(() => {
     dispatch(actions.setAllCountries());
-  },[]);
+    dispatch(actions.setAllActivities());
+  }, []);
 
   return (
     <div className="App">

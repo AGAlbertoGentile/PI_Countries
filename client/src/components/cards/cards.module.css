@@ -1,8 +1,8 @@
 .cardsContainer{
     display: grid;
-    grid-gap: 30px;
+    grid-gap: 40px;
     grid-template-columns: repeat(auto-fit,minmax(300px, 300px));
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 40px;
 }

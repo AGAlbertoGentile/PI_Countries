@@ -15,9 +15,29 @@ const getCountryById = async (req, res) => {
                 model: Activity,
                 through:{attributes:[]}
             }]
-         });
+        });
+
         if (!country) throw new Error("ID not found");
-        return res.status(200).json(country)
+
+        const output = await Country.findByPk(country.id, {include: [Activity]});
+        
+        const associatedActivities = output.Activities.map((activity)=>{ return activity.name})
+
+        const finalCountry = {
+            id: output.id,
+            name: output.name,
+            flags: output.flags,
+            continents: output.continents,
+            capital: output.capital,
+            region: output.region,
+            subRegion: output.subRegion,
+            population: output.population,
+            maps: output.maps,
+            activities: associatedActivities,
+        }
+        console.log('1', finalCountry)
+        
+        return res.status(200).json(finalCountry)
     } catch (error) {
         res.status(404).json({ error: error.message })
     }

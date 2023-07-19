@@ -19,7 +19,7 @@ const getCountryByName = async (name) => {
                 through:{attributes:[]} // le indico a mi tabla intermedia que no traiga informacion.
             }]
         });
-        console.log(foundCountry)
+        console.log('found', foundCountry)
         if(!foundCountry) {
             throw Error ('Not found');
         }

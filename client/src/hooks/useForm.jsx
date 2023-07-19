@@ -1,36 +1,39 @@
 import { useDispatch } from 'react-redux';
 import { createNewActivity } from '../utils/apiFuctions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as actions from '../redux/actions';
 
 
 
 
-function validate(activity){
-    
+function validate(activity) {
+
     const errors = {};
     const hasNumbers = /^\D*$/
 
-    if(!hasNumbers.test(activity.name)){
+    if (!hasNumbers.test(activity.name)) {
         errors.name = "You can not add numbers in this field";
     }
-    if(!activity.name){
-        // errors.name = "This field is required";
+    if (!activity.name) {
+        errors.fieldInput = "This field is required";
     }
-    if(!activity.difficulty){
-        // errors.difficulty = "This field is required";
+    if (!activity.difficulty) {
+        errors.fieldInput = "This field is required";
     }
-    if(!activity.duration){
-        // errors.duration = "This field is required";
+    if (activity.difficulty !== "" && (activity.difficulty < 1 || activity.difficulty > 5)){
+        errors.difficulty = "Grades must be between 1 and 5"
     }
-    if(activity.duration > 200){
+    if (!activity.duration) {
+        errors.fieldInput = "This field is required";
+    }
+    if (activity.duration > 200) {
         errors.duration = "The duration of the activity cannot exceed 200 minutes";
     }
-    if(!activity.season){
-        // errors.season = "This field is required";
+    if (!activity.season) {
+        errors.fieldInput = "This field is required";
     }
-    if(activity.countries.length === 0){
-        errors.countries = "This field is required";
+    if (activity.countries.length === 0) {
+        errors.fieldInput = "This field is required";
     }
     return errors;
 };
@@ -41,48 +44,63 @@ export default function useForm() {
     const dispatch = useDispatch();
 
     const [activity, setActivity] = useState({
-        name:"",
-        difficulty:"",
-        duration:"",
-        season:"",
-        countries:[]
+        name: "",
+        difficulty: "",
+        duration: "",
+        season: "",
+        countries: []
     });
 
     const [errors, setErrors] = useState({})
+
+    useEffect(()=>{
+        setErrors(validate(activity));
+    },[activity]);
+
 
     function handleChange(e) {
         setActivity({
             ...activity,
             [e.target.name]: e.target.value
         })
-        setErrors(
-            validate({
-              ...activity,
-              [e.target.name]: e.target.value
-            }));
     };
 
 
     function handleSubmit(event) {
         event.preventDefault();
-        createNewActivity(activity);
-        //aca tengo que mandar mi nueva actividad al selector filter.
-        dispatch(actions.addActivity(activity.name))
+        const formatNameActivity = activity.name.charAt(0).toUpperCase() + activity.name.slice(1);
+        console.log(formatNameActivity)
+        const outputActivity = {
+            ...activity,
+            name: formatNameActivity
+        }
+        createNewActivity(outputActivity)
+            .then(() => dispatch(actions.setAllActivities()));
+
         dispatch(actions.findCountryByName(""));
         dispatch(actions.searchFlag(""));
-        alert('The activity was created successfully');
+        setActivity({
+            name: "",
+            difficulty: "",
+            duration: "",
+            season: "",
+            countries: []
+        });
     };
 
-    function handleClick(id){
-        if(!activity.countries.includes(id)){
+    function handleClick(id) {
+        if (!activity.countries.includes(id)) {
             setActivity(
-                {...activity,
-                countries: [...activity.countries, id]});
+                {
+                    ...activity,
+                    countries: [...activity.countries, id]
+                });
+        } else {
+            window.alert('Country is allready selected')
         }
-        
     };
 
-    return{
+    return {
         handleSubmit,
         handleChange,
         handleClick,

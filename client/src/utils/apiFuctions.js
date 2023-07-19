@@ -10,6 +10,16 @@ export async function getAllCountries(){
 };
 
 
+export async function getAllActivities(){
+    const endpoint = 'http://localhost:3001/activity/'
+
+    const activities = (await axios (endpoint)).data;
+    
+    if(!activities) throw Error ('No activity created in db');
+    return activities;
+};
+
+
 export async function createNewActivity(activity){
 
     const endpoint = 'http://localhost:3001/activity/';

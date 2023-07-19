@@ -20,12 +20,13 @@ export default function usePagination(){
     useEffect(() => {
         setMinIndex((currentPage - 1) * countriesPerPages);
         setMaxIndex(currentPage * countriesPerPages);
-        dispatch(actions.findCountryByName(""));
+        // dispatch(actions.findCountryByName(""));
         dispatch(actions.searchFlag(""));
     }, [])
 
+    
     useEffect(() => {
-        setCurrentView(filteredCountries.slice(minIndex, maxIndex));
+        setCurrentView(filteredCountries?.slice(minIndex, maxIndex));
         setMaxNumOfPages(Math.ceil(filteredCountries.length / countriesPerPages));
     }, [filteredCountries, currentPage]);
 

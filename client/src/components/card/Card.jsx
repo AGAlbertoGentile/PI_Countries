@@ -7,8 +7,8 @@ export default function Card({country}) {
     return(
         <div className={style.cardContainer}>
             <Link to={`/detail/${id}`}>
-            <h1 className={style.cardTitle}>{name}</h1>
             <img className={style.img} src={flags} alt='country flag'/>
+            <h1 className={style.cardTitle}>{name}</h1>
             <span className={style.cardInformation}>{continents}</span>
             </Link>
         </div>
