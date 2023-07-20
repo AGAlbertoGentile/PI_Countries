@@ -3,10 +3,9 @@ import style from './home.module.css';
 import Cards from '../../components/cards/Cards';
 import usePagination from '../../hooks/usePagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterCountries, orderCountries, resetFilters, filterCountriesByActivity, setFilter, setOrder } from '../../redux/actions';
+import { setFilter, setOrder, setCurrentPage } from '../../redux/actions';
 import * as actions from '../../redux/actions';
 import { useEffect, useState } from 'react';
-
 
 
 export default function Home() {
@@ -21,7 +20,7 @@ export default function Home() {
     
     const [order, setLocalOrder] = useState("");
 
-    const [filterChosenLocal, setFilterChosenLocal] = useState({continentChosen: "", activityChosen: "Select activity"});
+    const [filterChosenLocal, setFilterChosenLocal] = useState({continentChosen: "", activityChosen: "All activities"});
 
     const {
         onClick,
@@ -30,6 +29,14 @@ export default function Home() {
         currentView
     } = usePagination();
     
+
+    useEffect(() => {
+        dispatch(actions.setAllCountries())
+        .then(()=> dispatch(setFilter(filtersChosen)))
+        .then(()=> dispatch(setOrder(orderChosen)));
+        dispatch(actions.setAllActivities());
+    }, []);
+
     useEffect(()=>{
         setFilterChosenLocal(filtersChosen);
         setLocalOrder(orderChosen);
@@ -51,7 +58,8 @@ export default function Home() {
             ...filtersChosen,
             continentChosen: selectorFilter,
         }))
-        dispatch(setOrder(order)); // ACTION
+        dispatch(setOrder(order));
+        dispatch(setCurrentPage(1));
     };
 
     function handleFilterByActivity(event){
@@ -64,31 +72,22 @@ export default function Home() {
             ...filtersChosen,
             activityChosen: selectorFilter,
         }))
-        dispatch(setOrder(order)); // ACTION
+        dispatch(setOrder(order));
+        dispatch(setCurrentPage(1));
     };
 
     function handleReset(){
         dispatch(setFilter({
             continentChosen: "All",
-            activityChosen: "Select activity"
+            activityChosen: "All activities"
         }));
         dispatch(setOrder("Select order"))
     };
 
-    // function handleFilters(event){
-    //     setFilterChosenLocal({
-    //         ...filterChosenLocal,
-    //         [event.target.name]: event.target.value,
-    //     })
-    //     dispatch(setFilter({
-    //         ...filterChosen,
-    //         [event.target.name]: event.target.value,
-    //     }))
-    // };
 
-    let selectorActivities = ['Select activity'];
+    let selectorActivities = ['All activities'];
     
-    allActivities.map((activity) => {if(!selectorActivities.includes(activity.name)){
+    allActivities.forEach((activity) => {if(!selectorActivities.includes(activity.name)){
         selectorActivities.push(activity.name);
     }});
 
@@ -96,27 +95,33 @@ export default function Home() {
     return (
         <div>
             <div className={style.filterContainer}>
-                <select value={filterChosenLocal.continentChosen} onChange={handleFilterByContinent}>
-                    {["All", "Europe", "Asia", "Africa", "Oceania", "Antarctica", "North America", "South America"].map((continents) =>
-                        (<option  value={continents}>{continents}</option>))};
-                </select>
-                <select value={filterChosenLocal.activityChosen} onChange={handleFilterByActivity}>
+                <div className={style.selectComponents}>
+                    <select className={style.selectFilters} value={filterChosenLocal.continentChosen} onChange={handleFilterByContinent}>
+                        {["All", "Europe", "Asia", "Africa", "Oceania", "Antarctica", "North America", "South America"].map((continents) =>
+                            (<option  value={continents}>{continents}</option>))};
+                    </select>
+                </div>
+                <div className={style.selectComponents}>
+                <select className={style.selectFilters} value={filterChosenLocal.activityChosen} onChange={handleFilterByActivity}>
                     {selectorActivities?.map((activity) =>
                         (<option value={activity}>{activity}</option>))};
                 </select>
-                <select value={order} onChange={handleSort}>
+                </div>
+                <div className={style.selectComponents}>
+                <select className={style.selectFilters} value={order} onChange={handleSort}>
                     {['Select order', 'A-Z', 'Z-A', 'Most populated', 'Least populated'].map((order) =>
                         (<option value={order}>{order}</option>))};
                 </select>
-                <button onClick={handleReset}>Reset</button>
+                </div>
+                <button className={style.buttonReset} onClick={handleReset}>Reset filters</button>
             </div>
             <div className={style.homeContainer}>
                 <Cards currentView={currentView} />
             </div>
-            <div className={style.filterContainer}>
-                <button name='previous' onClick={onClick}>Prev</button>
-                <span> {currentPage} / {maxNumOfPages} </span>
-                <button name='next' onClick={onClick}>Next</button>
+            <div className={style.paginationContainer}>
+                <button name='previous' className={style.pageButtons}onClick={onClick}>Prev</button>
+                <label className={style.pageNumbers}> {currentPage} / {maxNumOfPages} </label>
+                <button name='next' className={style.pageButtons} onClick={onClick}>Next</button>
             </div>
             
         </div>

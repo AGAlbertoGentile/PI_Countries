@@ -23,7 +23,7 @@ const getActivities = async (req, res) => {
                     countries: countries
                 }
             })
-        }
+        };
 
         res.status(200).json(formattedActivities);
     }catch(error){

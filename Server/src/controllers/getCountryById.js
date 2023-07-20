@@ -30,12 +30,12 @@ const getCountryById = async (req, res) => {
             continents: output.continents,
             capital: output.capital,
             region: output.region,
+            area: output.area,
             subRegion: output.subRegion,
             population: output.population,
             maps: output.maps,
             activities: associatedActivities,
         }
-        console.log('1', finalCountry)
         
         return res.status(200).json(finalCountry)
     } catch (error) {

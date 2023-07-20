@@ -9,7 +9,7 @@ const postActivity = async (req, res) => {
         const activity = req.body;
         
         const { name, difficulty, duration, season, countries } = activity
-        // console.log(activity);
+
         const newActivity = await Activity.create({
             name,
             difficulty,
@@ -19,7 +19,8 @@ const postActivity = async (req, res) => {
         
         const countriesRegister = await Country.findAll({
             where:{
-                id: {[Op.in]: countries}
+                // id: {[Op.in]: countries}
+                name: {[Op.in]: countries}
             }
         })
         
@@ -37,7 +38,6 @@ const postActivity = async (req, res) => {
             season: output.season,
             countries: associatedCountries
         }
-        console.log('1',finalActivity);
         res.status(200).json(finalActivity);
     } catch (error) {
         res.status(400).json({error: error.message});

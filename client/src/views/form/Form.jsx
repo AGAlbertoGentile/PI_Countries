@@ -1,9 +1,7 @@
 import style from './form.module.css';
 import useForm from '../../hooks/useForm';
-import { useState, useEffect } from 'react';
 import SearchBar from '../../components/searchBar/SearchBar';
 import { useSelector } from 'react-redux';
-// import validate from '../../components/validation';
 
 
 export default function Form() {
@@ -12,6 +10,7 @@ export default function Form() {
         handleSubmit,
         handleChange,
         handleClick,
+        handleDeleteClick,
         activity,
         errors
     } = useForm();
@@ -19,53 +18,65 @@ export default function Form() {
     const countries = useSelector((state) => state.allCountries);
     
     const flag = useSelector((state) => state.searchFlag);
-
+    
     return (
         <form className={style.formContainer} onSubmit={handleSubmit}>
-            <span className={style.spanValidation}>* Required fields</span>
-            <label className={style.label}>Name *</label>
-            <input className={style.placeholder}
-                name="name"
-                placeholder={"Name of the activity"}
-                type="text"
-                onChange={handleChange}
-            />
-            <p className={style.validations}>{errors.name}</p>
+            <div className={style.filtersContainer}>
+                <span className={style.spanValidation}>* Required fields</span>
+                <label className={style.label}>Name *</label>
+                <input className={style.inputForm}
+                    name="name"
+                    value={activity.name}
+                    placeholder={"Name of the activity"}
+                    type="text"
+                    onChange={handleChange}
+                />
+                <p className={style.validations}>{errors.name}</p>
 
-            <label className={style.label}>Difficulty *</label>
-            <input className={style.placeholder}
-                name="difficulty"
-                placeholder={"Set difficulty"}
-                type="number"
-                onChange={handleChange}
-            />
-            <p className={style.validations}>{errors.difficulty}</p>
+                <label className={style.label}>Difficulty *</label>
+                <input className={style.inputForm}
+                    name="difficulty"
+                    value={activity.difficulty}
+                    placeholder={"Set difficulty"}
+                    type="number"
+                    onChange={handleChange}
+                />
+                <p className={style.validations}>{errors.difficulty}</p>
 
-            <label className={style.label}>Duration *</label>
-            <input className={style.placeholder}
-                name="duration"
-                placeholder={'Set duration (minutes)'}
-                type="number"
-                onChange={handleChange}
-            />
-            <p className={style.validations}>{errors.duration}</p>
+                <label className={style.label}>Duration *</label>
+                <input className={style.inputForm}
+                    name="duration"
+                    value={activity.duration}
+                    placeholder={'Set duration (hours)'}
+                    type="number"
+                    onChange={handleChange}
+                />
+                <p className={style.validations}>{errors.duration}</p>
 
-            <label className={style.label}>Season *</label>
-            <select name='season' onChange={handleChange} >
-                {['', 'Winter', 'Summer', 'Spring', 'Autumn'].map((season, index) =>
-                    (<option key={index} value={season}>{season}</option>))};
-            </select>
-            {/* <p>{errors.season}</p> */}
+                <label className={style.label}>Season *</label>
+                <select className={style.selectForm}name='season' value={activity.season} onChange={handleChange} >
+                    {['Choose season', 'Winter', 'Summer', 'Spring', 'Autumn'].map((season, index) =>
+                        (<option key={index} value={season}>{season}</option>))};
+                </select>
+                {/* <p>{errors.season}</p> */}
 
-            <label className={style.label}>Countries *</label>
-            <SearchBar />
+                <label className={style.label}>Countries *</label>
+                <button className={style.button} type="submit" disabled={Object.keys(errors).length}>Add activity</button>
 
-            {flag && countries?.map((country) => <div className={style.countriesOptions} key={country.id}><button className={style.buttonsCountry} type='button' onClick={() => handleClick(country.id)}>{country.name}</button></div>)}
-            <p>Added countries: </p>
-            <p>{activity.countries.join(" - ")}</p>
-            <p>{errors.countries}</p>
-            <button className={style.button} type="submit" disabled={Object.keys(errors).length}>Add activity</button>
+                <label className={style.label}>Choosen countries</label>
+                {activity.countries?.map((country, index) => <div key={index}><button  type='button' className={style.countriesChoosen}onClick={() => handleDeleteClick(country)}>{country}</button></div>)}
 
+                {/* <p>{activity.countries.join(" - ")}</p> */}
+                <p>{errors.countries}</p>
+
+            </div>
+            
+            <div className={style.optionsCountriesContainer}>
+                <label className={style.label}>Choose countries</label>
+                <SearchBar />
+                {flag && countries?.map((country) => <div key={country.id}><button  type='button' className={style.countriesOptions} onClick={() => handleClick(country.name)}>{country.name}</button></div>)}
+                
+            </div>
         </form>
     )
 };

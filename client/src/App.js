@@ -6,28 +6,26 @@ import Detail from '../src/views/detail/Detail';
 import Form from '../src/views/form/Form';
 import Error from '../src/views/error/Error';
 import NavBar from '../src/components/navBar/NavBar';
-import Header from '../src/components/header/Header'
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import * as actions from './redux/actions';
 
 
 
 function App() {
 
-  const dispatch = useDispatch();
-
   const location = useLocation();
 
-  useEffect(() => {
-    dispatch(actions.setAllCountries());
-    dispatch(actions.setAllActivities());
-  }, []);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(actions.setAllCountries());
+  //   dispatch(actions.setAllActivities());
+  // }, []);
 
   return (
     <div className="App">
-      <Header />
          {location.pathname !== '/' && (<NavBar />)}
       <Routes>
         <Route path="/" element={<Landing/>} />
@@ -38,6 +36,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

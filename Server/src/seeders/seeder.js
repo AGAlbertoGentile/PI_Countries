@@ -5,7 +5,7 @@ const URL = 'http://localhost:5000/countries';
 
 const fillDataBase = async () =>{
     try {
-        allCountries = await Country.findAll()
+        const allCountries = await Country.findAll()
         if(allCountries.length === 0){
             const { data } = await axios(URL);
         

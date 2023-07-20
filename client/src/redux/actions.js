@@ -2,12 +2,8 @@ import { getAllActivities, getAllCountries, setCountryByName } from '../utils/ap
 import {
     GET_ALL_COUNTRIES,
     GET_ALL_ACTIVITIES,
-    FILTER_COUNTRIES,
-    ORDER_COUNTRIES,
-    RESET_PAGE, DECREASE_PAGE,
-    INCREASE_PAGE, RESET_FILTER,
+    SET_PAGE,
     GET_COUNTRY_NAME, SEARCH_FLAG,
-    FILTER_COUNTRIES_BY_ACTIVITY,
     SET_FILTER,
     SET_ORDER
 } from './actionsTypes'
@@ -55,50 +51,12 @@ export const findCountryByName = (name) => {
     };
 };
 
-export const resetCurrentPage = () => {
+export const setCurrentPage = (page) => {
     return {
-        type: RESET_PAGE,
+        type: SET_PAGE,
+        payload: page
     }
 };
-
-export const increasePage = () => {
-    return {
-        type: INCREASE_PAGE,
-    }
-};
-
-export const decreasePage = () => {
-    return {
-        type: DECREASE_PAGE,
-    }
-};
-
-// export const orderCountries = (order) => {
-//     return {
-//         type: ORDER_COUNTRIES,
-//         payload: order
-//     };
-// };
-
-// export const filterCountries = (continents) => {
-//     return {
-//         type: FILTER_COUNTRIES,
-//         payload: continents
-//     };
-// };
-
-// export const filterCountriesByActivity = (activity) => {
-//     return {
-//         type: FILTER_COUNTRIES_BY_ACTIVITY,
-//         payload: activity
-//     };
-// };
-
-// export const resetFilters = () => {
-//     return {
-//         type: RESET_FILTER
-//     }
-// };
 
 export const searchFlag = (value) => {
     return {

@@ -1,7 +1,7 @@
 export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES';
 export const ORDER_COUNTRIES = 'ORDER_COUNTRIES';
 export const FILTER_COUNTRIES = 'FILTER_COUNTRIES';
-export const RESET_PAGE = 'RESET_PAGE';
+export const SET_PAGE = 'SET_PAGE';
 export const INCREASE_PAGE = 'INCREASE_PAGE';
 export const DECREASE_PAGE = 'DECREASE_PAGE';
 export const RESET_FILTER = 'RESET_FILTER';

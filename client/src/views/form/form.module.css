@@ -1,9 +1,80 @@
 .formContainer{
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    width: 35%;
+    margin: auto;
     margin-top: 100px;
+    background-color: rgb(243, 237, 237);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow:  rgba(0, 0, 0, 0.3) 0px 13px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.filtersContainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & input{
+        text-align: center;
+    }
+    & select{
+        width: 177px;
+    }
+    /* justify-content: center; */
+}
+.optionsCountriesContainer{
+    flex: 1;
+    overflow-y: hidden;
+}
+
+.inputForm{
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.177);
+    border: none;
+    border-radius: 2px;
+    height: 20px;
+}
+
+.selectForm{
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.177);
+    border: none;
+    border-radius: 2px;
+    height: 22px;
+}
+
+.countriesOptions{
+    width: 173px;
+    background-color: rgba(255, 255, 255, 0.722);
+    border: none;
+    padding: 3px;
+    margin-top: 6px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.177);
+    cursor: pointer;
+}
+
+.countriesOptions:hover{
+    background-color: burlywood;
+    transition: 0.3s;
+}
+
+.countriesChoosen{
+    width: 173px;
+    background-color: rgba(255, 255, 255, 0.722);
+    border: none;
+    padding: 3px;
+    margin-top: 6px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.177);
+    cursor: pointer;
+
+}
+
+.countriesChoosen:hover{
+    background-color: rgba(245, 44, 44, 0.512);
+    transition: 0.3s;
 }
 
 .spanValidation{
@@ -12,9 +83,9 @@
 }
 
 .validations{
-    
     color: red;
-    font-size: 12px;
+    font-size: 14px;
+    height: 10px;
 }
 
 /* .placeholder{
@@ -31,20 +102,20 @@
 .button{
     margin-top: 20px;
     padding: 10px;
-    background-color:aqua;
+    background-color:burlywood;
     border-radius: 5px;
     font-weight: bold;
     box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.406);
 }
 
-.countriesOptions {
+/* .countriesOptions {
     position: absolute;
     top: 615px;
     right: 50px;
     width: 500px;
     display: flex;
     align-items: flex-start;
-}
+} */
 
 .buttonsCountry {
   flex: 0 0 calc(40% - 100px); /* Esto distribuirá los elementos en 3 columnas */

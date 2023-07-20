@@ -26,10 +26,10 @@ function validate(activity) {
     if (!activity.duration) {
         errors.fieldInput = "This field is required";
     }
-    if (activity.duration > 200) {
-        errors.duration = "The duration of the activity cannot exceed 200 minutes";
+    if (activity.duration > 24) {
+        errors.duration = "The duration of the activity cannot exceed 24 hours";
     }
-    if (!activity.season) {
+    if (!activity.season || activity.season === 'Choose season') {
         errors.fieldInput = "This field is required";
     }
     if (activity.countries.length === 0) {
@@ -47,8 +47,8 @@ export default function useForm() {
         name: "",
         difficulty: "",
         duration: "",
-        season: "",
-        countries: []
+        season: "Choose season",
+        countries: [],
     });
 
     const [errors, setErrors] = useState({})
@@ -65,45 +65,51 @@ export default function useForm() {
         })
     };
 
-
     function handleSubmit(event) {
         event.preventDefault();
         const formatNameActivity = activity.name.charAt(0).toUpperCase() + activity.name.slice(1);
-        console.log(formatNameActivity)
         const outputActivity = {
             ...activity,
             name: formatNameActivity
         }
         createNewActivity(outputActivity)
-            .then(() => dispatch(actions.setAllActivities()));
-
-        dispatch(actions.findCountryByName(""));
-        dispatch(actions.searchFlag(""));
         setActivity({
             name: "",
             difficulty: "",
             duration: "",
-            season: "",
-            countries: []
+            season: "Choose season",
+            countries: [],
         });
+        dispatch(actions.findCountryByName(""));
+        dispatch(actions.searchFlag(""));
     };
 
-    function handleClick(id) {
-        if (!activity.countries.includes(id)) {
+    function handleClick(name) {
+        if (!activity.countries.includes(name)) {
             setActivity(
                 {
                     ...activity,
-                    countries: [...activity.countries, id]
+                    countries: [...activity.countries, name]
                 });
         } else {
             window.alert('Country is allready selected')
         }
     };
 
+    function handleDeleteClick(country) {
+        let filterChooseCountries = activity.countries.filter((element) => element !== country)
+        
+        setActivity({
+            ...activity,
+            countries: filterChooseCountries
+        })
+    };
+
     return {
         handleSubmit,
         handleChange,
         handleClick,
+        handleDeleteClick,
         activity,
         errors
     }

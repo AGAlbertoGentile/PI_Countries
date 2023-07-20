@@ -18,7 +18,7 @@ export default function SearchBar() {
     
     return (
         <div className={style.container}>
-            <input type='text'
+            <input  className={style.containerInput}type='text'
                 placeholder='Search Country'
                 onChange={inputHandler} />
         </div>

@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { decreasePage, increasePage } from '../redux/actions';
+import { useEffect } from 'react';
+import { setCurrentPage } from '../redux/actions';
 import * as actions from '../redux/actions';
-
 
 
 export default function usePagination(){
@@ -11,38 +10,28 @@ export default function usePagination(){
 
     const filteredCountries = useSelector((state) => state.filteredCountries);
     const currentPage = useSelector((state) => state.currentPage);
-    const countriesPerPages = 10;
-    const [minIndex, setMinIndex] = useState(0);
-    const [maxIndex, setMaxIndex] = useState(10);
-    const [currentView, setCurrentView] = useState([]);
-    const [maxNumOfPages, setMaxNumOfPages] = useState(1);
 
-    useEffect(() => {
-        setMinIndex((currentPage - 1) * countriesPerPages);
-        setMaxIndex(currentPage * countriesPerPages);
-        // dispatch(actions.findCountryByName(""));
-        dispatch(actions.searchFlag(""));
-    }, [])
+    const countriesPerPages = 10;
+    const maxIndex = currentPage * countriesPerPages;
+    const minIndex = maxIndex - countriesPerPages;
+    const currentView = filteredCountries?.slice(minIndex, maxIndex);
+    const maxNumOfPages = Math.ceil(filteredCountries.length / countriesPerPages);
 
     
     useEffect(() => {
-        setCurrentView(filteredCountries?.slice(minIndex, maxIndex));
-        setMaxNumOfPages(Math.ceil(filteredCountries.length / countriesPerPages));
-    }, [filteredCountries, currentPage]);
+        // dispatch(actions.findCountryByName(""));
+        dispatch(actions.searchFlag(""));
+    }, [])
 
 
     function onClick(e) {
         if (e.target.name === 'previous')
             if (currentPage > 1) {
-                dispatch(decreasePage());
-                setMinIndex(minIndex - countriesPerPages);
-                setMaxIndex(maxIndex - countriesPerPages);
+                dispatch(setCurrentPage(currentPage - 1));
             }
         if (e.target.name === 'next')
             if (currentPage < maxNumOfPages) {
-                dispatch(increasePage());
-                setMinIndex(minIndex + countriesPerPages);
-                setMaxIndex(maxIndex + countriesPerPages);
+                dispatch(setCurrentPage(currentPage + 1));
             }
     };
 

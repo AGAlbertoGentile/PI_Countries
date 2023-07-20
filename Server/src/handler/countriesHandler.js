@@ -11,22 +11,7 @@ const getCountriesHandler = async(req, res) => {
             response = await getCountries();
             return res.status(200).json(response);
         };
-        // const output = await Country.findByPk(country.id, {include: [Activity]});
         
-        // const associatedActivities = output.Activities.map((activity)=>{ return activity.name})
-
-        // const finalCountry = {
-        //     id: output.id,
-        //     name: output.name,
-        //     flags: output.flags,
-        //     continents: output.continents,
-        //     capital: output.capital,
-        //     region: output.region,
-        //     subRegion: output.subRegion,
-        //     population: output.population,
-        //     maps: output.maps,
-        //     activities: associatedActivities,
-        // }
         response = await getCountryByName(name);
         return res.status(200).json(response);
     } catch (error) {

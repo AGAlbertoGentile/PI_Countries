@@ -4,5 +4,5 @@
     grid-template-columns: repeat(auto-fit,minmax(300px, 300px));
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 50px;
 }
