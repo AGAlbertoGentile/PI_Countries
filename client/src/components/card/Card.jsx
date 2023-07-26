@@ -9,8 +9,8 @@ export default function Card({country}) {
             <Link to={`/detail/${id}`}>
             <img className={style.img} src={flags} alt='country flag'/>
             <h1 className={style.cardTitle}>{name}</h1>
-            <span className={style.cardInformation}>{continents}</span>
-            <p className={style.cardInformation}>{population}</p>
+            {/* <span className={style.cardInformation}>{continents}</span> */}
+            {/* <p className={style.cardInformation}>{population}</p> */}
 
             </Link>
         </div>
