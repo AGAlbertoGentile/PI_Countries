@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://localhost:3001';
+import { URL } from './const';
 axios.defaults.baseURL = URL;
 
 export async function getAllCountries(){
