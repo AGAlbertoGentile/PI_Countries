@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function Detail() {
 
-    const dispatch = useDispatch();
-
     const allActivities = useSelector((state) => state.allActivities)
 
     const { idPais } = useParams();

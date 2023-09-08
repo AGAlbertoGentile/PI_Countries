@@ -1,9 +1,10 @@
 import axios from 'axios';
-
+const URL = 'http://localhost:3001';
+axios.defaults.baseURL = URL;
 
 export async function getAllCountries(){
     try{
-        const endpoint = 'http://localhost:3001/countries';
+        const endpoint = '/countries';
         const countries = (await axios (endpoint)).data;
         return countries;
     } catch (error){
@@ -14,7 +15,7 @@ export async function getAllCountries(){
 
 export async function getAllActivities(){
     try{
-        const endpoint = 'http://localhost:3001/activity/'
+        const endpoint = '/activity/'
         const activities = (await axios (endpoint)).data;
         return activities;
     } catch (error){
@@ -25,7 +26,7 @@ export async function getAllActivities(){
 
 export async function createNewActivity(activity){
     try{
-        const endpoint = 'http://localhost:3001/activity/';
+        const endpoint = '/activity/';
         const newActivity = (await axios.post(endpoint, activity)).data;
         return newActivity;
     } catch (error){
@@ -36,7 +37,7 @@ export async function createNewActivity(activity){
 
 export async function setCountryByName(name){
     try{
-        const endpoint = `http://localhost:3001/countries/?name=${name}`;
+        const endpoint = `/countries/?name=${name}`;
         const country = (await axios (endpoint)).data;
         return country;
     } catch (error){
@@ -47,7 +48,7 @@ export async function setCountryByName(name){
 
 export async function setCountryById(id){
     try{
-        const endpoint = `http://localhost:3001/countries/${id}`;
+        const endpoint = `/countries/${id}`;
         const country = (await axios (endpoint)).data;
         return country;
     } catch (error){

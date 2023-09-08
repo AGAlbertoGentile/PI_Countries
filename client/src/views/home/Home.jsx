@@ -35,7 +35,7 @@ export default function Home() {
         .then(()=> dispatch(setFilter(filtersChosen)))
         .then(()=> dispatch(setOrder(orderChosen)));
         dispatch(actions.setAllActivities());
-    }, []);
+    }, [dispatch]);
 
     useEffect(()=>{
         setFilterChosenLocal(filtersChosen);

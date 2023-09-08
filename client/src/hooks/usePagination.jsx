@@ -19,9 +19,8 @@ export default function usePagination(){
 
     
     useEffect(() => {
-        // dispatch(actions.findCountryByName(""));
         dispatch(actions.searchFlag(""));
-    }, [])
+    }, [dispatch])
 
 
     function onClick(e) {

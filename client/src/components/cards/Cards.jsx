@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from '../card/Card'
 import style from './cards.module.css';
-import { useSelector } from 'react-redux';
 
 
 export default function Cards ({currentView}){
