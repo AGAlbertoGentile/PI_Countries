@@ -6,7 +6,7 @@ import Form from '../src/views/form/Form';
 import Error from '../src/views/error/Error';
 import NavBar from '../src/components/navBar/NavBar';
 import { useLocation } from 'react-router-dom';
-
+import './App.css';
 
 function App() {
 
